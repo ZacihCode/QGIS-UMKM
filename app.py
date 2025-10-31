@@ -4,17 +4,19 @@ import os
 import csv
 import pymysql
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
-# ⚙️ Konfigurasi Database
 db = pymysql.connect(
-    host="dirgantara.arenhost.com",
-    user="pilihinm_pmb",
-    password="Habibi321!!",
-    database="pilihinm_pmb",
+    host=os.getenv("DATABASE_HOST"),
+    user=os.getenv("DATABASE_USER"),
+    password=os.getenv("DATABASE_PASSWORD"),
+    database=os.getenv("DATABASE_NAME"),
     cursorclass=pymysql.cursors.DictCursor,
 )
 

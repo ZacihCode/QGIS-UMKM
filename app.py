@@ -30,10 +30,7 @@ DATABASE_URL = f"mysql+pymysql://{db_user}:{db_pass_encoded}@{db_host}:3306/{db_
 # === SQLAlchemy Config ===
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-print("DATABASE_URL:", DATABASE_URL)
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "connect_args": {"ssl": {"ssl_disabled": True}}
-}
+
 db = SQLAlchemy(app)
 
 

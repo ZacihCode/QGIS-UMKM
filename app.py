@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 import csv
 from datetime import datetime
+import pymysql
 
 # === Load environment variables ===
 load_dotenv()
@@ -30,7 +31,14 @@ DATABASE_URL = f"mysql+pymysql://{db_user}:{db_pass_encoded}@{db_host}:3306/{db_
 # === SQLAlchemy Config ===
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+try:
+    conn = pymysql.connect(
+        host=db_host, user=db_user, password=db_pass, database=db_name
+    )
+    print("✅ Database connected OK!")
+    conn.close()
+except Exception as e:
+    print("❌ DB connection error:", e)
 db = SQLAlchemy(app)
 
 

@@ -30,7 +30,10 @@ DATABASE_URL = f"mysql+pymysql://{db_user}:{db_pass_encoded}@{db_host}:3306/{db_
 # === SQLAlchemy Config ===
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+print("DATABASE_URL:", DATABASE_URL)
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "connect_args": {"ssl": {"ssl_disabled": True}}
+}
 db = SQLAlchemy(app)
 
 
@@ -196,6 +199,15 @@ def delete(id):
     db.session.delete(record)
     db.session.commit()
     return redirect(url_for("data"))
+
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    import traceback
+
+    print("🔥 ERROR:", e)
+    traceback.print_exc()
+    return f"Internal Server Error: {str(e)}", 500
 
 
 # ===========================

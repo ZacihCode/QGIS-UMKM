@@ -1,24 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
-from dotenv import load_dotenv
 import os
 import csv
 import requests
 from datetime import datetime
 
-# === Load environment ===
-load_dotenv()
-
 app = Flask(__name__)
-app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.config["UPLOAD_FOLDER"] = "/tmp/uploads"
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret")
+app.config["SECRET_KEY"] = "kodiva_super_secret"
 
-# === API Base URL ===
 API_BASE = "https://pilihin.my.id/api/umkm"
-API_KEY = os.getenv("API_KEY", "kodiva123")  # optional keamanan
-
-HEADERS = {"X-API-KEY": API_KEY, "Accept": "application/json"}
+HEADERS = {"Accept": "application/json"}
+TIMEOUT = 20  # biar ga timeout di Vercel
 
 
 # ===========================

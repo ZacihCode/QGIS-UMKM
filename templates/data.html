@@ -133,10 +133,10 @@
                             </td>
                             <td class="px-4 py-3 text-center text-sm text-gray-700">{{ r.pegawai }}</td>
                             <td class="px-4 py-3">
-                                <img src="{{ url_for('static', filename='uploads/' ~ r.foto) }}" alt="{{ r.umkm }}"
+                                <img src="https://pilihin.my.id/storage/uploads/{{ r.foto }}" alt="{{ r.umkm }}"
                                     width="70" height="50"
                                     class="rounded-lg object-cover shadow-sm cursor-pointer hover:scale-110 transform transition-all duration-200"
-                                    @click="imageSrc='{{ url_for('static', filename='uploads/' ~ r.foto) }}'; showImage=true;">
+                                    @click="imageSrc='https://pilihin.my.id/storage/uploads/{{ r.foto }}'; showImage=true;">
                             </td>
                             <td class="px-4 py-3 text-center">
                                 <div class="flex justify-center items-center gap-1" x-data="{ open: false }">

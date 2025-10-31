@@ -201,15 +201,6 @@ def delete(id):
     return redirect(url_for("data"))
 
 
-@app.errorhandler(Exception)
-def handle_exception(e):
-    import traceback
-
-    print("🔥 ERROR:", e)
-    traceback.print_exc()
-    return f"Internal Server Error: {str(e)}", 500
-
-
 # ===========================
 # 🚀 Jalankan
 # ===========================
